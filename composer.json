@@ -6,11 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "filament/filament": "^3.2",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9"
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9",
+        "spatie/laravel-permission": "^6.7",
+        "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.64",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
@@ -46,7 +51,15 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
-        ]
+        ],
+
+        "style:check": "php-cs-fixer fix --diff --ansi --dry-run",
+        "style:fix": "php-cs-fixer fix --diff --ansi",
+        "ide-helper:update": [
+            "@php artisan ide-helper:models --write-mixin",
+            "php-cs-fixer fix --diff --ansi"
+        ],
+        "test": "phpunit -c phpunit.xml --color=always"
     },
     "extra": {
         "laravel": {
